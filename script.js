@@ -72,6 +72,7 @@ const gameOver = () => {
   // so total time taken is current time - start time
   const finishTime = new Date().getTime();
   const timeTaken = (finishTime - startTime) / 1000;
+  const timeTakenInSeconds = Math.round(timeTaken);
 
   // show result modal
   resultModal.innerHTML = "";
@@ -84,7 +85,7 @@ const gameOver = () => {
   // show result
   resultModal.innerHTML += `
     <h1>Finished!</h1>
-    <p>You took: <span class="bold">${timeTaken}</span> seconds</p>
+    <p>You took: <span class="bold">${timeTakenInSeconds}</span> seconds</p>
     <p>You made <span class="bold red">${errorCount}</span> mistakes</p>
     <button onclick="closeModal()">Close</button>
   `;
@@ -117,8 +118,8 @@ const start = () => {
     if (count == 0) {
       // -------------- START TYPING -----------------
       document.addEventListener("keydown", typeController);
+      display.classList.add("inactive");
       countdownOverlay.style.display = "none";
-      display.classList.remove("inactive");
       clearInterval(startCountdown);
 
       startTime = new Date().getTime();
